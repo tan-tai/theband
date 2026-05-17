@@ -1,243 +1,475 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The band</title>
-    <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/vi/thumb/c/c7/Logo_Real_Madrid.svg/1432px-Logo_Real_Madrid.svg.png">
-    <link rel="stylesheet" href="./assets/css/styles.css">
-    <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css">
+    <title>Du Lịch Đà Nẵng</title>
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/themify-icons/1.0.1/css/themify-icons.css">
+
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #header{
+            height:60px;
+            background:#0099cc;
+            position:fixed;
+            top:0;
+            left:0;
+            right:0;
+            z-index:1;
+        }
+
+        #nav{
+            display:inline-block;
+        }
+
+        #nav li{
+            display:inline-block;
+        }
+
+        #nav li a{
+            color:#fff;
+            text-decoration:none;
+            line-height:60px;
+            padding:0 24px;
+            display:block;
+        }
+
+        #nav li:hover a{
+            background:#fff;
+            color:#000;
+        }
+
+        #slider{
+            margin-top:60px;
+            height:700px;
+            background:url('https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=1600&auto=format&fit=crop') top center / cover no-repeat;
+            position:relative;
+        }
+
+        .text-content{
+            position:absolute;
+            bottom:50px;
+            width:100%;
+            text-align:center;
+            color:#fff;
+        }
+
+        .text-heading{
+            font-size:50px;
+            margin-bottom:10px;
+        }
+
+        .text-description{
+            font-size:20px;
+        }
+
+        .content-section{
+            width:900px;
+            max-width:100%;
+            margin:auto;
+            padding:80px 16px;
+        }
+
+        .section-heading{
+            text-align:center;
+            font-size:32px;
+            margin-bottom:15px;
+            letter-spacing:4px;
+        }
+
+        .section-sub-heading{
+            text-align:center;
+            color:#777;
+            margin-bottom:25px;
+        }
+
+        .about-text{
+            text-align:justify;
+            line-height:1.6;
+        }
+
+        .places-list{
+            margin-top:40px;
+            display:flex;
+            gap:20px;
+        }
+
+        .place-item{
+            background:#fff;
+            box-shadow:0 0 10px rgba(0,0,0,0.2);
+            border-radius:10px;
+            overflow:hidden;
+            flex:1;
+        }
+
+        .place-img{
+            width:100%;
+            height:220px;
+            object-fit:cover;
+        }
+
+        .place-body{
+            padding:16px;
+        }
+
+        .place-heading{
+            margin-bottom:10px;
+        }
+
+        .place-desc{
+            line-height:1.5;
+            margin:15px 0;
+        }
+
+        .btn{
+            background:#0099cc;
+            color:#fff;
+            border:none;
+            padding:12px 20px;
+            cursor:pointer;
+            border-radius:5px;
+        }
+
+        .btn:hover{
+            opacity:0.8;
+        }
+
+        .contact-info{
+            line-height:2;
+            font-size:18px;
+        }
+
+        .contact-form{
+            margin-top:20px;
+        }
+
+        .form-control{
+            width:100%;
+            padding:12px;
+            margin-bottom:15px;
+            border:1px solid #ccc;
+        }
+
+        #footer{
+            background:#0099cc;
+            color:#fff;
+            text-align:center;
+            padding:40px;
+        }
+
+        .socials-list a{
+            color:#fff;
+            font-size:24px;
+            margin:0 10px;
+            text-decoration:none;
+        }
+
+        /* Modal */
+
+        .modal{
+            position:fixed;
+            top:0;
+            right:0;
+            left:0;
+            bottom:0;
+            background:rgba(0,0,0,0.5);
+            display:none;
+            align-items:center;
+            justify-content:center;
+        }
+
+        .modal.open{
+            display:flex;
+        }
+
+        .modal-container{
+            background:#fff;
+            width:500px;
+            max-width:90%;
+            border-radius:10px;
+            overflow:hidden;
+            animation:modalFadeIn ease .4s;
+        }
+
+        @keyframes modalFadeIn{
+            from{
+                transform:translateY(-200px);
+                opacity:0;
+            }
+            to{
+                transform:translateY(0);
+                opacity:1;
+            }
+        }
+
+        .modal-header{
+            background:#0099cc;
+            color:#fff;
+            padding:20px;
+            text-align:center;
+            font-size:30px;
+        }
+
+        .modal-body{
+            padding:20px;
+        }
+
+        .modal-input{
+            width:100%;
+            padding:12px;
+            margin:10px 0 20px;
+        }
+
+        #buy-tickets{
+            width:100%;
+            padding:15px;
+            background:#0099cc;
+            border:none;
+            color:#fff;
+            cursor:pointer;
+        }
+
+        .modal-close{
+            position:absolute;
+            right:20px;
+            top:15px;
+            color:#fff;
+            cursor:pointer;
+        }
+
+        @media(max-width:768px){
+            .places-list{
+                flex-direction:column;
+            }
+        }
+    </style>
 </head>
+
 <body>
+
     <div id="main">
+
         <div id="header">
-            <!-- Begin: nav -->
             <ul id="nav">
-                <li><a href="#">Home</a></li>
-                <li><a href="#band">Band</a></li>
-                <li><a href="#tour">Tour</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li>
-                    <a href="">
-                        More
-                        <i class="nav-arrow-down ti-angle-down"></i>
-                    </a>
-                    <ul class="subnap">
-                        <li><a href="#">Merchandise</a></li>
-                        <li><a href="#">Extras</a></li>
-                        <li><a href="#">Media</a></li>
-                    </ul>
-                </li>
+                <li><a href="#">Trang Chủ</a></li>
+                <li><a href="#about">Giới Thiệu</a></li>
+                <li><a href="#places">Địa Điểm</a></li>
+                <li><a href="#contact">Liên Hệ</a></li>
             </ul>
-             <!-- End: nav -->
-
-              <!-- Begin: search button -->
-              <div class="search-btn">
-                <i class="search-icon ti-search"></i>
-              </div>
-              <!-- End: search button -->
-
-               
         </div>
 
         <div id="slider">
             <div class="text-content">
-                <h2 class="text-heading">Chicago</h2>
-                <div class="text-discription">Thank you, Chicago - A night we won't forget.</div>
+                <h2 class="text-heading">Đà Nẵng</h2>
+                <p class="text-description">
+                    Thành phố đáng sống nhất Việt Nam
+                </p>
             </div>
         </div>
 
         <div id="content">
-            <!--About secsion-->
-            <div id="band" class="content-section">
-                <h2 class="section-heading">THE BAND</h2>
-                <p class="section-sub-heading">We love music</p>
-                <p class="about-text">
-                    We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+            <!-- About -->
+            <div id="about" class="content-section">
+                <h2 class="section-heading">DU LỊCH ĐÀ NẴNG</h2>
+                <p class="section-sub-heading">
+                    Thành phố biển xinh đẹp
                 </p>
-                <div class="row members-list">
-                    <div class="col col-third text-center">
-                        <p class="member-name">Name</p>
-                        <img src="./assets/img/band/member1.jpg" alt="Name" class="member-img">
+
+                <p class="about-text">
+                    Đà Nẵng là một trong những địa điểm du lịch nổi tiếng nhất Việt Nam.
+                    Thành phố sở hữu những bãi biển đẹp, đồ ăn ngon và nhiều địa danh hấp dẫn
+                    như Bà Nà Hills, Cầu Rồng, biển Mỹ Khê và bán đảo Sơn Trà.
+                </p>
+            </div>
+
+            <!-- Places -->
+            <div id="places" class="content-section">
+
+                <h2 class="section-heading">ĐỊA ĐIỂM NỔI BẬT</h2>
+
+                <div class="places-list">
+
+                    <div class="place-item">
+                        <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?q=80&w=1200&auto=format&fit=crop"
+                        class="place-img">
+
+                        <div class="place-body">
+                            <h3 class="place-heading">Bà Nà Hills</h3>
+
+                            <p class="place-desc">
+                                Khu du lịch nổi tiếng với khí hậu mát mẻ và Cầu Vàng.
+                            </p>
+
+                            <button class="btn js-buy-ticket">
+                                Đặt Tour
+                            </button>
+                        </div>
                     </div>
-                    <div class="col col-third text-center">
-                        <p class="member-name">Name</p>
-                        <img src="./assets/img/band/member1.jpg" alt="Name" class="member-img">
+
+                    <div class="place-item">
+                        <img src="https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=1200&auto=format&fit=crop"
+                        class="place-img">
+
+                        <div class="place-body">
+                            <h3 class="place-heading">Cầu Rồng</h3>
+
+                            <p class="place-desc">
+                                Biểu tượng nổi tiếng của thành phố Đà Nẵng.
+                            </p>
+
+                            <button class="btn js-buy-ticket">
+                                Đặt Tour
+                            </button>
+                        </div>
                     </div>
-                    <div class="col col-third text-center">
-                        <p class="member-name">Name</p>
-                        <img src="./assets/img/band/member1.jpg" alt="Name" class="member-img">
+
+                    <div class="place-item">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop"
+                        class="place-img">
+
+                        <div class="place-body">
+                            <h3 class="place-heading">Biển Mỹ Khê</h3>
+
+                            <p class="place-desc">
+                                Một trong những bãi biển đẹp nhất hành tinh.
+                            </p>
+
+                            <button class="btn js-buy-ticket">
+                                Đặt Tour
+                            </button>
+                        </div>
                     </div>
+
                 </div>
             </div>
 
-             <!--Tour secsion-->
-             <div id="tour" class="tour-secsion">
-                <div class="content-section">
-                    <h2 class="section-heading text-white">TOUR DATES</h2>
-                    <p class="section-sub-heading text-white">Remember to book your tickets!</p>
-                <!-- ticket-->
-                    <ul class="tickets-list">
-                        <li>September <span class="sold-out">Sold out</span></li>
-                        <li>October <span class="sold-out">Sold out</li>
-                        <li>November <span class="quantity">3</span></li>
+            <!-- Contact -->
+            <div id="contact" class="content-section">
 
-                    </ul>
+                <h2 class="section-heading">LIÊN HỆ</h2>
 
-                    <!-- places -->
-                    <div class="row places-list">
-                        <div class="col col-third">
-                            <img src="./assets/img/places/place1.jpg" alt="New York" class="place-img">
-                            <div class="place-body">
-                                <h3 class="place-heading">New York</h3>
-                                <p class="place-time">Fri 27 Nov 2016</p>
-                                <p class="place-desc">Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
-                                <button  class="btn js-buy-ticket">Buy Tickets</button>
-                            </div>
-                        </div>
-                        <div class="col col-third">
-                            <img src="./assets/img/places/place2.jpg" alt="New York" class="place-img">
-                            <div class="place-body">
-                                <h3 class="place-heading">Paris</h3>
-                                <p class="place-time">Sat 28 Nov 2016</p>
-                                <p class="place-desc">Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
-                                <button  class="btn js-buy-ticket">Buy Tickets</button>
-                            </div>
-                        </div>
-                        <div class="col col-third">
-                            <img src="./assets/img/places/place3.jpg" alt="New York" class="place-img">
-                            <div class="place-body">
-                                <h3 class="place-heading">San Francisco</h3>
-                                <p class="place-time">Sun 29 Nov 2016</p>
-                                <p class="place-desc">Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
-                                <button  class="btn js-buy-ticket">Buy Tickets</button>
-                            </div>
-                        </div>
-                    </div>
+                <p class="section-sub-heading">
+                    Hãy liên hệ để được tư vấn du lịch
+                </p>
+
+                <div class="contact-info">
+                    <p><i class="ti-location-pin"></i> Đà Nẵng, Việt Nam</p>
+                    <p><i class="ti-mobile"></i> 0123 456 789</p>
+                    <p><i class="ti-email"></i> danangtravel@gmail.com</p>
                 </div>
-             </div>
-            
-              <!--Begin: Content secsion-->
-              <div id="contact" class="content-section">
-                <h2 class="section-heading">CONTACT</h2>
-                <p class="section-sub-heading">Fan? Drop a note!</p>
-    
-                <div class="row contact-content">
-                    <div class="col col-half contact-info">
-                        <p><i class="ti-location-pin"></i>Chicago, US</p>
-                        <p><i class="ti-mobile"></i> Phone: +00 151515</p>
-                        <p><i class="ti-email"></i>Email: mail@mail.com</p>
-                    </div>  
-                    <div class="col col-half contact-form">
-                       <form action="">
-                        <div class="row">
-                            <div class="col col-half">
-                                <input type="text" name="" placeholder="Name" required id="" class="form-control">
-                            </div>
-                            <div class="col col-half">
-                                <input type="email" name="" placeholder="Email" required id="" class="form-control">
-                            </div>
-                       
-                        </div>
 
-                        <div class="row mt-8">
-                            <div class="col col-full">
-                                <input type="text" name="" placeholder="Message" required id="" class="form-control">
-                            </div>
-                        </div>
-                        <input class="btn pull-right mt-16" type="submit" value="SEND">
-                       </form>
-                        
-                    </div>
+                <div class="contact-form">
+                    <input type="text" placeholder="Tên" class="form-control">
+                    <input type="email" placeholder="Email" class="form-control">
+                    <input type="text" placeholder="Tin nhắn" class="form-control">
+
+                    <button class="btn">
+                        Gửi
+                    </button>
                 </div>
             </div>
-            <!--End: Content secsion-->
 
-            <div class="map-secsion">
-                <img src="./assets/img/map.jpg" alt="Map">
-            </div>
         </div>
-            <!-- footer -->
+
+        <!-- Footer -->
+
         <div id="footer">
+
             <div class="socials-list">
                 <a href=""><i class="ti-facebook"></i></a>
                 <a href=""><i class="ti-instagram"></i></a>
                 <a href=""><i class="ti-youtube"></i></a>
-                <a href=""><i class="ti-pinterest"></i></a>
-                <a href=""><i class="ti-twitter"></i></a>
-                <a href=""><i class="ti-linkedin"></i></a>
             </div>
-            <p class="copyrigth">Powered by <a href="">w3.css</a></p>
+
+            <p style="margin-top:20px">
+                © 2025 Du lịch Đà Nẵng
+            </p>
+
         </div>
+
     </div>
 
+    <!-- Modal -->
+
     <div class="modal js-modal">
+
         <div class="modal-container js-modal-container">
-                <div class="modal-close js-modal-close">
-                    <i class="ti-close"></i>
-                </div>
 
-                <header class="modal-header">
+            <div class="modal-close js-modal-close">
+                <i class="ti-close"></i>
+            </div>
 
-                <i class="modal-heading-icon ti-bag"></i>
-                Tickets
+            <header class="modal-header">
+                Đặt Tour Đà Nẵng
             </header>
 
             <div class="modal-body">
-                <label for="ticket-quantity" class="modal-label">
-                    <i class="ti-shopping-cart"></i>
-                    Tickets, $15 per person
-                </label>
-                <input id="ticket-quantity" type="text" class="modal-input" placeholder="How many?">
-               
-                <label for="ticket-email" class="modal-label">
-                    <i class="ti-user"></i>
-                    Send To
-                </label>
-                <input id="ticket-email" type="email" class="modal-input" placeholder="Enter email...">
+
+                <label>Số lượng người</label>
+
+                <input type="text"
+                class="modal-input"
+                placeholder="Nhập số lượng">
+
+                <label>Email</label>
+
+                <input type="email"
+                class="modal-input"
+                placeholder="Nhập email">
 
                 <button id="buy-tickets">
-                    Pay <i class="ti-check"></i>
+                    Xác Nhận Đặt Tour
                 </button>
+
             </div>
 
-            <footer class="modal-footer">
-                <p class="modal-help">Need <a href="">help?</a></p> 
-
-            </footer>
         </div>
+
     </div>
+
+    <script>
+
+        const buyBtns = document.querySelectorAll('.js-buy-ticket')
+        const modal = document.querySelector('.js-modal')
+        const modalContainer = document.querySelector('.js-modal-container')
+        const modalClose = document.querySelector('.js-modal-close')
+
+        function showBuyTickets() {
+            modal.classList.add('open')
+        }
+
+        function hideBuyTickets() {
+            modal.classList.remove('open')
+        }
+
+        for (const buyBtn of buyBtns){
+            buyBtn.addEventListener('click', showBuyTickets)
+        }
+
+        modalClose.addEventListener('click', hideBuyTickets)
+
+        modal.addEventListener('click', hideBuyTickets)
+
+        modalContainer.addEventListener('click', function(event){
+            event.stopPropagation()
+        })
+
+    </script>
+
 </body>
 </html>
-
-<script>
-    const buyBtns = document.querySelectorAll('.js-buy-ticket')
-    const modal = document.querySelector('.js-modal')
-    const modalContainer = document.querySelector('.js-modal-container')
-    const modalClose = document.querySelector('.js-modal-close')
-
-    //ham hien thi modal mua ve( them class vao modal )
-    function showBuyTickets() {
-        modal.classList.add('open')
-    }
-
-    //ham an modal mua ve( go bo class cua modal )
-    function hideBuyTickets() {
-        modal.classList.remove('open')
-    }
-
-    //lap qua tung the button va nghe hanh vi click
-    for (const buyBtn of buyBtns){      /*tao ra 1 bien moi co ten Btn dc luu lan luot cac nut trong danh sach Btns*/
-        buyBtn.addEventListener('click', showBuyTickets ) /* nghe dc click cua ng dung */
-    }
-    // nghe hanh vi click vao nut button close
-    modalClose.addEventListener('click', hideBuyTickets)
-
-    modal.addEventListener('click', hideBuyTickets)
-    modalContainer.addEventListener('click', function (event){
-        event.stopPropagation()
-    })
-</script>
-
-
+```
